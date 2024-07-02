@@ -5,10 +5,6 @@ import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 
 const CommentArea = ({ asin }) => {
-  /* state = {
-    recensioni: [], // Manteniamo questo per gestire le recensioni
-  }; */
-
   const [recensioni, setRecensioni] = useState([]);
 
   const fetchReviews = async () => {
