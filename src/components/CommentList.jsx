@@ -1,13 +1,18 @@
-import { ListGroup } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 
-const CommentList = ({ recensioni }) => (
+const CommentList = ({ recensioni, removeComment }) => (
   <ListGroup>
     {recensioni.map((recensione) => (
-      <ListGroup.Item key={recensione._id}>
-        <h5 className="overflow-hidden">{recensione.author}</h5>
-        <p>{recensione.comment}</p>
-        <small>Rating: {recensione.rate}</small>
-      </ListGroup.Item>
+      <>
+        <ListGroup.Item key={recensione._id}>
+          <p className="overflow-hidden">{recensione.author}</p>
+          <h6>{recensione.comment}</h6>
+          <small>Rating: {recensione.rate}</small>
+        </ListGroup.Item>
+        <Button variant="outline-danger" onClick={() => removeComment(recensione._id)} className="mb-3 w-50" size="sm">
+          rimuovi commento
+        </Button>
+      </>
     ))}
   </ListGroup>
 );

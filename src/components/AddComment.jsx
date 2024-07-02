@@ -80,7 +80,7 @@ const AddComment = ({ asin, onAddComment }) => {
           <option value="5">5</option>
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="outline-primary" type="submit" size="sm">
         Submit
       </Button>
     </Form>

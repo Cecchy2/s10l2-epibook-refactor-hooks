@@ -27,6 +27,26 @@ const CommentArea = ({ asin }) => {
     }
   };
 
+  const removeComment = async (id) => {
+    try {
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjlhOTdjMjM5YzAwMTUyZjRiM2QiLCJpYXQiOjE3MTk0OTExNzAsImV4cCI6MTcyMDcwMDc3MH0.hWXOvdsqvExQltlx-3uMY51gcEWGWiG266VOOod96kU",
+        },
+      });
+
+      if (resp.ok) {
+        fetchReviews();
+      } else {
+        console.error("Errore nella rimozione del commento");
+      }
+    } catch (err) {
+      console.error("Errore nella fetch", err);
+    }
+  };
+
   /* componentDidMount() {
     this.fetchReviews(this.props.asin);
   }
@@ -42,7 +62,7 @@ const CommentArea = ({ asin }) => {
 
   return (
     <>
-      <CommentList recensioni={recensioni} />
+      <CommentList recensioni={recensioni} removeComment={removeComment} />
       <AddComment asin={asin} onAddComment={() => fetchReviews(asin)} />
     </>
   );
