@@ -67,11 +67,11 @@ const BookList = () => {
         </Col>
       </Row>
       <Row>
-        <Col md={8}>
-          <Row>
+        <Col md={9}>
+          <Row className="g-3">
             {filteredBooks.map((book, index) => {
               return (
-                <Col md={4} key={index} className="p-0 ">
+                <Col md={3} key={index} className="p-0">
                   <SingleBook
                     img={book.img}
                     title={book.title}
