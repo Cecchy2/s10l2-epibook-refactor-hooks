@@ -22,7 +22,7 @@ const BookList = () => {
   const [selectedBookAsin, setSelectedBookAsin] = useState(null);
 
   const changeBooks = (genere) => {
-    setBooks: genere;
+    setBooks(genere);
   };
 
   const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchBar.toLowerCase()));
