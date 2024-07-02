@@ -65,21 +65,24 @@ class BookList extends Component {
           </Col>
         </Row>
         <Row>
-          <Col md={4}>
-            {filteredBooks.map((book, index) => {
-              return (
-                <SingleBook
-                  key={index}
-                  img={book.img}
-                  title={book.title}
-                  price={book.price}
-                  category={book.category}
-                  asin={book.asin}
-                  onClick={() => this.setState({ selectedBookAsin: book.asin })}
-                  className={this.state.selectedBookAsin === book.asin ? "selected-card" : ""}
-                />
-              );
-            })}
+          <Col md={8}>
+            <Row>
+              {filteredBooks.map((book, index) => {
+                return (
+                  <Col md={4} key={index} className="p-0 ">
+                    <SingleBook
+                      img={book.img}
+                      title={book.title}
+                      price={book.price}
+                      category={book.category}
+                      asin={book.asin}
+                      onClick={() => this.setState({ selectedBookAsin: book.asin })}
+                      className={this.state.selectedBookAsin === book.asin ? "selected-card" : ""}
+                    />
+                  </Col>
+                );
+              })}
+            </Row>
           </Col>
           <Col xs={3}>
             <h3>Reviews</h3>
