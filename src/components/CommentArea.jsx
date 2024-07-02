@@ -1,16 +1,19 @@
-import React, { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 
-class CommentArea extends Component {
-  state = {
+const CommentArea = ({ asin }) => {
+  /* state = {
     recensioni: [], // Manteniamo questo per gestire le recensioni
-  };
+  }; */
 
-  fetchReviews = async () => {
+  const [recensioni, setRecensioni] = useState([]);
+
+  const fetchReviews = async () => {
     try {
-      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`, {
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${asin}`, {
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjlhOTdjMjM5YzAwMTUyZjRiM2QiLCJpYXQiOjE3MTk0OTExNzAsImV4cCI6MTcyMDcwMDc3MH0.hWXOvdsqvExQltlx-3uMY51gcEWGWiG266VOOod96kU",
@@ -19,7 +22,7 @@ class CommentArea extends Component {
 
       if (resp.ok) {
         const reviews = await resp.json();
-        this.setState({ recensioni: reviews });
+        setRecensioni(reviews);
       } else {
         console.error("Errore nel reperimento dei commenti");
       }
@@ -28,7 +31,7 @@ class CommentArea extends Component {
     }
   };
 
-  componentDidMount() {
+  /* componentDidMount() {
     this.fetchReviews(this.props.asin);
   }
 
@@ -36,16 +39,17 @@ class CommentArea extends Component {
     if (prevProps.asin !== this.props.asin) {
       this.fetchReviews(this.props.asin);
     }
-  }
+  } */
+  useEffect(() => {
+    fetchReviews();
+  }, [asin]);
 
-  render() {
-    return (
-      <>
-        <CommentList recensioni={this.state.recensioni} />
-        <AddComment asin={this.props.asin} onAddComment={() => this.fetchReviews(this.props.asin)} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <CommentList recensioni={recensioni} />
+      <AddComment asin={asin} onAddComment={() => fetchReviews(asin)} />
+    </>
+  );
+};
 
 export default CommentArea;
