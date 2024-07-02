@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <MyNav />
-      <Container>
+      <Container fluid>
         <Welcome />
 
         <BookList />
